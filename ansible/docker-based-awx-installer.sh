@@ -19,7 +19,7 @@ function install_dependencies_rhel8 {
 
 function install_dependencies_rhel7 {
     # Install EPEL repository
-    sudo yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+    sudo yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
     sudo yum -y update
     # Install additional packages
     sudo yum -y install git gcc gcc-c++ ansible nodejs gettext device-mapper-persistent-data lvm2 bzip2 python3-pip libseccomp wget
@@ -31,6 +31,12 @@ function install_dependencies_rhel7 {
     sudo usermod -aG $USER && newgrp docker
     # Install Docker Compose
     pip3 install docker-compose
+}
+
+function install_awx {
+    # Clone repo
+    git clone -b 18.0.0 https://github.com/ansible/awx.github
+    
 }
 
 if grep -q -i "release 8" /etc/redhat-release
